@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp2">
+<head>
+    <title>AngularJS Dynamic Template2</title>
+
+    <script type="text/javascript" src="vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="vendor/angular.min.js"></script>
+    <script type="text/javascript" src="js/app2.js"></script>
+
+    <link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+
+<div id="container" ng-controller="ContentCtrl as ctrl">
+    <table>
+        <tr ng-repeat="item in ctrl.content">
+            <!--<td ng-repeat="list in item.list">{{list.name}}</td>-->
+            <!--<td ng-controller="ElementController as elementCtrl">-->
+            <td>{{item.name}}</td>
+            <td ng-switch="item.list.length">
+                <div ng-switch-default td-directive ng-repeat="list in item.list" content="list" parent="item"></div>
+                <div ng-switch-when="0" td-directive parent="item"></div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+[
+    {"name":"test","list":[{"type":"U","name":"test_1"},{"type":"F","name":"test_12222"}]},
+    {"name":"test222","list":[{"type":"F","name":"test_2"}]},
+    {"name":"test222","list":[]}
+]
