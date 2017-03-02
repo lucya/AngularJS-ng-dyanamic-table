@@ -1,4 +1,4 @@
-var app2 = angular.module('myApp2', []);
+var app2 = angular.module('myApp2', ['utils.autofocus']);
 
 app2.config(function ($sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist(['self', '**']);
@@ -77,17 +77,17 @@ app2.directive('tdDirective', function ($compile, TemplateService) {
     var getTemplate = function (contentType) {
         var template = '';
         
-        var cmTemp = '<button ng-click="addRow()">추가</button><button ng-click="delRow()">삭제</button>';
+        var cmTemp = '<button ng-click="addRow()" ng-if="first">추가</button><button ng-click="delRow()">삭제</button>';
 
         switch (contentType) {
             case 'U':
-                template = '<div ng-controller="ElementController as elementCtrl"> {{content.name}} <a ng-click="elementCtrl.add(content.name)">UUUU</a>'+cmTemp+'</div>';
+                template = '<div ng-controller="ElementController as elementCtrl"> <input type="text" ng-model="content.name" ng-pattern=""  autofocus required></input>{{content.name}} <a ng-click="elementCtrl.add(content.name)">UUUU</a>'+cmTemp+'</div>';
                 break;
             case 'F':
                 template = '<div ng-controller="ElementController as elementCtrl">{{content.name}} <a ng-click="elementCtrl.add(content.name)">FFFF</a>'+cmTemp+'</div>';
                 break;
             default :
-                template = '<div ng-controller="ElementController as elementCtrl">{{content.name}}<a ng-click="elementCtrl.add(content.name)">None</a>'+cmTemp+'</div>';
+                template = '<div ng-controller="ElementController as elementCtrl"> <input type="text" ng-model="content.name" ng-pattern=""  autofocus required></input>{{content.name}}<a ng-click="elementCtrl.add(content.name)">None</a>'+cmTemp+'</div>';
                 break;
         }
 
@@ -119,7 +119,8 @@ app2.directive('tdDirective', function ($compile, TemplateService) {
 //        replace: true,
         scope: {
             parent: '=',
-            content: '='
+            content: '=',
+            first: '='
         }
     };
 });
@@ -130,5 +131,15 @@ app2.controller('ElementController', function($scope){
    } 
 
 });
-
+angular.module('utils.autofocus', [])
+.directive('autofocus', ['$timeout', function($timeout) {
+  return {
+    restrict: 'A',
+    link : function($scope, $element) {
+      $timeout(function() {
+        $element[0].focus();
+      });
+    }
+  }
+}]);
 

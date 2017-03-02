@@ -12,18 +12,23 @@
 <body>
 
 <div id="container" ng-controller="ContentCtrl as ctrl">
+    <div name="frm" ng-form="frm">
     <table>
         <tr ng-repeat="item in ctrl.content">
             <!--<td ng-repeat="list in item.list">{{list.name}}</td>-->
             <!--<td ng-controller="ElementController as elementCtrl">-->
             <td>{{item.name}}</td>
             <td ng-switch="item.list.length">
-                <div ng-switch-default td-directive ng-repeat="list in item.list" content="list" parent="item"></div>
-                <div ng-switch-when="0" td-directive parent="item"></div>
+                <div ng-switch-default td-directive ng-repeat="list in item.list" content="list" parent="item" first="$first"></div>
+                <div ng-switch-when="0" td-directive parent="item" first="true"></div>
             </td>
         </tr>
     </table>
+    </div>
 </div>
+    <div>
+        <span><button ng-click="ctrl.check()"> Check </button></span>
+    </div>
 
 </body>
 </html>
