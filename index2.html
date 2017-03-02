@@ -12,7 +12,7 @@
 <body>
 
 <div id="container" ng-controller="ContentCtrl as ctrl">
-    <div name="frm" ng-form="frm">
+    <form name="frm" >
     <table>
         <tr ng-repeat="item in ctrl.content">
             <!--<td ng-repeat="list in item.list">{{list.name}}</td>-->
@@ -24,7 +24,7 @@
             </td>
         </tr>
     </table>
-    </div>
+    </form>
 </div>
     <div>
         <span><button ng-click="ctrl.check()"> Check </button></span>

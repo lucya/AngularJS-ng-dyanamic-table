@@ -39,6 +39,10 @@ app2.controller('ContentCtrl', function (DataService, $scope, $filter) {
 
     ctrl.fetchContent();
     
+    ctrl.check = function(){
+        console.debug('check', $('form').filter('.ng-invalid-pattern, .ng-invalid-required').length);
+    }
+    
     $scope.emptyData = {name:'new222', type:'', empty:true}
     $scope.$on('addData', function(event, args){
         console.debug('addData', args)
@@ -87,7 +91,7 @@ app2.directive('tdDirective', function ($compile, TemplateService) {
                 template = '<div ng-controller="ElementController as elementCtrl">{{content.name}} <a ng-click="elementCtrl.add(content.name)">FFFF</a>'+cmTemp+'</div>';
                 break;
             default :
-                template = '<div ng-controller="ElementController as elementCtrl"> <input type="text" ng-model="content.name" ng-pattern=""  autofocus required></input>{{content.name}}<a ng-click="elementCtrl.add(content.name)">None</a>'+cmTemp+'</div>';
+                template = '<div ng-controller="ElementController as elementCtrl"> <input type="text" ng-model="content.name" ng-pattern="/^[0-9]+$/" ng-change="check2()" ng-model-options="{updateOn : \'blur change\'}"  autofocus required></input>{{content.name}}<a ng-click="elementCtrl.add(content.name)">None</a>'+cmTemp+'</div>';
                 break;
         }
 
@@ -129,6 +133,10 @@ app2.controller('ElementController', function($scope){
    this.add = function(name){
        alert(name)
    } 
+   //http://embed.plnkr.co/2hCAxnClv68Dl5c06Brm/
+   $scope.check2 = function(){
+       console.debug('xxxxx')
+   }
 
 });
 angular.module('utils.autofocus', [])
