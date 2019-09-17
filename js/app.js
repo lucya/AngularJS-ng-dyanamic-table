@@ -1,4 +1,6 @@
 var app = angular.module('myApp', []);
+var notUseVar = 1;
+var notUseVar2 = 2;
 
 app.config(function ($sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist(['self', '**']);
